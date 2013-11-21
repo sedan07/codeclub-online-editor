@@ -2,8 +2,8 @@ angular.module('ccApp.controllers', ['LocalStorageModule']).
   controller('EditorController', ['$scope', 'localStorageService', function($scope, localStorageService) {
     
     $scope.files = {
-        html: '',
-        css: ''
+        html: '<h1>My First HTML Page</h1>',
+        css: 'h1 {\n color: blue; \n}'
     };
     
     $scope.currentTab = 'html';
