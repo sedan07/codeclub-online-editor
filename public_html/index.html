@@ -1,0 +1,81 @@
+<html ng-app="ccApp">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="css/lib/bootstrap.css" >
+        <style type="text/css" media="screen">
+    #editor { 
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+    
+    .primaryNav {
+        margin: 0;
+    }
+    
+    .primaryNav li {
+        float: left;
+        margin: 0;
+        position: relative;
+        list-style: none;
+    }
+    
+    .primaryNav li a {
+        padding: 0 20px;
+        line-height: 40px;
+    }
+    
+    .header {
+        background-color:  #d3e8d0;
+        min-height: 40px;
+    }
+    
+    .editor-container {
+        position: absolute;
+        top: 40px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+    
+    .editor-container > div {
+        height: 100%;
+    }
+</style>
+    </head>
+    <body ng-controller="EditorController">
+        <div class="row header">
+            <div class="col-md-12">
+                <ul class="primaryNav">
+                    <li><a>HTML (layout)</a></li>
+                    <li><a>CSS (styling</a></li>
+                </ul>
+                {{ test }}
+            </div>
+        </div>
+        <div class="row editor-container">
+            <div class="col-md-6">
+                <div id="editor">
+                    
+                </div>
+            </div>
+            <div class="col-md-6">
+                <iframe id="previewWindow"></iframe>    
+            </div>
+        </div>
+
+<script src="js/lib/angular/angular.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/controllers/EditorController.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/lib/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/html");
+</script>
+    </body>
+</html>
