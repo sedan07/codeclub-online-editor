@@ -15,7 +15,7 @@ angular.module('ccApp.controllers', ['LocalStorageModule']).
         
         var styles = angular.element('<style type="text/css"></style>')
         styles.html($scope.files.css);
-        angular.element(doc).find('head').html('');
+        angular.element(doc).find('head style').remove();
         angular.element(doc).find('head').append(styles);
     };
     
