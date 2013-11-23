@@ -21,8 +21,8 @@ angular.module('ccApp.controllers', ['LocalStorageModule']).
     
     $scope.changeTab = function(newTab) {
         $scope.currentTab = newTab;
-        $scope.editor.setValue($scope.files[newTab]);
-        $scope.editor.getSession().setMode("ace/mode/"+newTab);
+        //$scope.editor.setValue($scope.files[newTab]);
+        //$scope.editor.getSession().setMode("ace/mode/"+newTab);
     }
     
     main = function() {
@@ -30,14 +30,14 @@ angular.module('ccApp.controllers', ['LocalStorageModule']).
         if (cache) {
             $scope.files = JSON.parse(cache);
         }
-        $scope.editor = ace.edit("editor");
-        $scope.editor.setTheme("ace/theme/monokai");
-        $scope.changeTab('html');
-        
-        $scope.editor.getSession().on('change', function(e) {
-            $scope.files[$scope.currentTab] = $scope.editor.getValue();
-            localStorageService.add('data_cache',JSON.stringify($scope.files));
-        });
+//        $scope.editor = ace.edit("editor");
+//        $scope.editor.setTheme("ace/theme/monokai");
+//        $scope.changeTab('html');
+//        
+//        $scope.editor.getSession().on('change', function(e) {
+//            $scope.files[$scope.currentTab] = $scope.editor.getValue();
+//            localStorageService.add('data_cache',JSON.stringify($scope.files));
+//        });
     };
     
     

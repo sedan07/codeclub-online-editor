@@ -24,17 +24,19 @@
         </div>
         <div class="row editor-container">
             <div class="col-md-6">
-                <div id="editor"></div>
+                <div ui-ace="{mode: currentTab, theme: 'monokai'}" mode='currentTab' id="editor"></div>
             </div>
             <div class="col-md-6">
                 <iframe id="previewWindow"></iframe>    
             </div>
         </div>
 
+        <script src="js/lib/ace/ace.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/lib/angular/angular.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/lib/localStorageModule.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/lib/ui-ace.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/app.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/controllers/EditorController.js" type="text/javascript" charset="utf-8"></script>
-        <script src="js/lib/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+        
     </body>
 </html>

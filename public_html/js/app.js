@@ -1,4 +1,4 @@
 angular.module('ccApp', [
-    //'pmApp.directives',
+    'ui.ace',
     'ccApp.controllers'
 ]);
