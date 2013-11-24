@@ -15,7 +15,8 @@ angular.module('ui.ace', [])
       restrict: 'EA',
       require: '?ngModel',
       scope: {
-          'mode': '='
+          'mode': '=',
+          'onLoad': '='
       },
       link: function (scope, elm, attrs, ngModel) {
         var options, opts, acee, session, onChange;
@@ -63,8 +64,8 @@ angular.module('ui.ace', [])
         }
 
         // onLoad callback
-        if (angular.isFunction(opts.onLoad)) {
-          opts.onLoad(acee);
+        if (angular.isFunction(scope.onLoad)) {
+          scope.onLoad(acee);
         }
 
         // Basic options

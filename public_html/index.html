@@ -24,7 +24,7 @@
         </div>
         <div class="row editor-container">
             <div class="col-md-6">
-                <div ui-ace="{mode: currentTab, theme: 'monokai'}" mode='currentTab' id="editor"></div>
+                <div ui-ace="{theme: 'monokai'}" mode='currentTab' on-load='aceLoaded' id="editor"></div>
             </div>
             <div class="col-md-6">
                 <iframe id="previewWindow"></iframe>    
