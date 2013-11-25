@@ -6,6 +6,8 @@ angular.module('ccApp.controllers', ['LocalStorageModule']).
         css: 'h1 {\n color: blue; \n}'
     };
     
+    $scope.sessions = {};
+    
     $scope.currentTab = 'html';
     $scope.editor = null;
     
@@ -22,24 +24,22 @@ angular.module('ccApp.controllers', ['LocalStorageModule']).
     
     $scope.changeTab = function(newTab) {
         $scope.currentTab = newTab;
-        $scope.editor.setValue($scope.files[newTab]);
-        //$scope.editor.getSession().setMode("ace/mode/"+newTab);
+        $scope.editor.setSession($scope.sessions[$scope.currentTab]);
+        //console.log(JSON.stringify($scope.sessions[$scope.currentTab]));
+        $scope.files[$scope.currentTab] = $scope.editor.getValue();
+        localStorageService.add('data_cache',JSON.stringify($scope.files));
+        //$scope.editor.setValue($scope.files[newTab]);
     }
     
     $scope.aceLoaded = function(_editor){
         // Editor part
         $scope.editor = _editor;
-        var _session = _editor.getSession();
-        //var _renderer = _editor.renderer;
-
-        // Options
-        _session.setUndoManager(new ace.UndoManager());
-
-        // Events
-        _session.on("change", function(e) {
-            $scope.files[$scope.currentTab] = $scope.editor.getValue();
-            localStorageService.add('data_cache',JSON.stringify($scope.files));
-        });
+        
+        //Creating some sessions!
+        $scope.sessions['html'] = ace.createEditSession($scope.files['html']);
+        $scope.sessions['html'].setUndoManager(new ace.UndoManager()); 
+        $scope.sessions['css'] = ace.createEditSession($scope.files['css']);
+        $scope.sessions['css'].setUndoManager(new ace.UndoManager());
         
         $scope.changeTab($scope.currentTab);
     };
