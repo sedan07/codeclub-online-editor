@@ -25,12 +25,14 @@ angular.module('ccApp.controllers', ['LocalStorageModule']).
     };
     
     $scope.changeTab = function(newTab) {
+        $scope.files[$scope.currentTab] = $scope.editor.getValue();
         $scope.currentTab = newTab;
         $scope.editor.setSession($scope.sessions[$scope.currentTab]);
-        $scope.files[$scope.currentTab] = $scope.editor.getValue();
     }
     
     $scope.save = function() {
+        $scope.files[$scope.currentTab] = $scope.editor.getValue();
+        
         if ($scope.localStoragePromise) {
             $timeout.cancel($scope.localStoragePromise);
         }

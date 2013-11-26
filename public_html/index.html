@@ -18,13 +18,13 @@
                     <li><a ng-click="changeTab('css')" ng-class="{current: currentTab == 'css'}">CSS (styling)</a></li>
                 </ul>
                 <ul class="commands">
-                    <li><a ng-click="publish()" href=""><i class="fa fa-play fa-lg"></i>Run</a></li>
+                    <li><a ng-click="publish()" href=""><i class="fa fa-eye"></i>Preview</a></li>
                 </ul>
             </div>
         </div>
         <div class="row editor-container">
             <div class="col-md-6">
-                <div ui-ace="{theme: 'monokai'}" mode='currentTab' on-load='aceLoaded' id="editor"></div>
+                <div ui-ace="{theme: 'eclipse'}" mode='currentTab' on-load='aceLoaded' id="editor"></div>
             </div>
             <div class="col-md-6">
                 <iframe id="previewWindow"></iframe>    
