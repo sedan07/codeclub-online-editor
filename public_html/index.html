@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="css/lib/reset.css" >
-        <link rel="stylesheet" href="css/lib/bootstrap.css" >
+<!--        <link rel="stylesheet" href="css/lib/bootstrap.css" >-->
         <link rel="stylesheet" href="css/global.css" >
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
@@ -23,12 +23,13 @@
             </div>
         </div>
         <div class="row editor-container">
-            <div class="col-md-6">
+            <fieldset class="column left">
                 <div ui-ace="{theme: 'eclipse'}" mode='currentTab' on-load='aceLoaded' id="editor"></div>
-            </div>
-            <div class="col-md-6">
-                <iframe id="previewWindow"></iframe>    
-            </div>
+            </fieldset>
+<!--            <div id="verticalResize"></div>-->
+            <fieldset class="column right">
+                <iframe id="previewWindow"></iframe> 
+            </fieldset>
         </div>
 
         <script src="js/lib/ace/ace.js" type="text/javascript" charset="utf-8"></script>
