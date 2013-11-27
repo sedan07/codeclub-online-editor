@@ -95,3 +95,30 @@ a i {
     width: 8px;
 }
 
+#previewPlaceholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 40px;
+    background-color: white;
+    text-align: center;
+    line-height: 40px;
+    font-size: 20px;
+    color: #333;
+    margin: -20px 0 0 -100px;
+    border-radius: 4px;
+}
+
+#previewPlaceholder i {
+    margin-right: 10px;
+}
+#previewBlackout {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.1);
+        
+}

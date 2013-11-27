@@ -28,7 +28,16 @@ angular.module('ccApp.controllers', ['LocalStorageModule']).
         $scope.files[$scope.currentTab] = $scope.editor.getValue();
         $scope.currentTab = newTab;
         $scope.editor.setSession($scope.sessions[$scope.currentTab]);
-    }
+    };
+    
+    $scope.hidePlaceholder = function() {
+        var frame = angular.element(document.querySelector('#previewWindow'))[0];
+        var doc = frame.contentDocument || frame.contentWindow.document;
+        if (angular.element(doc).find('body').html() === '') {
+            return false;
+        }
+        return true;
+    };
     
     $scope.save = function() {
         $scope.files[$scope.currentTab] = $scope.editor.getValue();

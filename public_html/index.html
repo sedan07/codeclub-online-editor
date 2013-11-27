@@ -28,7 +28,12 @@
             </fieldset>
 <!--            <div id="verticalResize"></div>-->
             <fieldset class="column right">
-                <iframe id="previewWindow"></iframe> 
+                <iframe id="previewWindow"></iframe>
+                <div id="previewBlackout" ng-hide="hidePlaceholder()">
+                    <div id="previewPlaceholder">
+                        <i class="fa fa-eye fa-lg"></i>Preview Area
+                    </div>
+                </div>
             </fieldset>
         </div>
 
