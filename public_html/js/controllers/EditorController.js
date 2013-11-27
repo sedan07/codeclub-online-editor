@@ -1,5 +1,5 @@
-angular.module('ccApp.controllers', ['LocalStorageModule']).
-  controller('EditorController', ['$scope', 'localStorageService', '$timeout', function($scope, localStorageService, $timeout) {
+angular.module('ccApp.controllers').
+  controller('EditorController', ['$scope', 'localStorageService', '$timeout', 'ApiFactory', '$routeParams', function($scope, localStorageService, $timeout, ApiFactory, $routeParams) {
     
     $scope.files = {
         html: '<h1>My First HTML Page</h1>',
@@ -10,6 +10,8 @@ angular.module('ccApp.controllers', ['LocalStorageModule']).
     $scope.currentTab = 'html';
     $scope.editor = null;
     $scope.localStoragePromise = null;
+    $scope.failedSave = false;
+    $scope.successfulSave = false;
     
     $scope.publish = function() {
         $scope.save();
@@ -40,7 +42,18 @@ angular.module('ccApp.controllers', ['LocalStorageModule']).
     };
     
     $scope.save = function() {
+        $scope.failedSave = false;
+        $scope.successfulSave = false;
         $scope.files[$scope.currentTab] = $scope.editor.getValue();
+        
+        // make HTTP request
+        ApiFactory.update($routeParams.id, {
+            'files': $scope.files
+        }, function(data) {
+            $scope.successfulSave = true;
+        }, function(data) {
+            $scope.failedSave = true;
+        });
         
         if ($scope.localStoragePromise) {
             $timeout.cancel($scope.localStoragePromise);

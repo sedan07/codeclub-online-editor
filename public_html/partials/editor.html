@@ -1,0 +1,27 @@
+<div class="row header">
+    <div class="col-md-12">
+        <ul class="primaryNav">
+            <li><a ng-click="changeTab('html')" ng-class="{current: currentTab == 'html'}">HTML (layout)</a></li>
+            <li><a ng-click="changeTab('css')" ng-class="{current: currentTab == 'css'}">CSS (styling)</a></li>
+        </ul>
+        <ul class="commands">
+            <li><a ng-click="publish()" href=""><i class="fa fa-eye"></i>Preview</a></li>
+        </ul>
+        <p ng-show="failedSave" class="save error">Unable to save your code at the moment :-(</p>
+        <p ng-show="successfulSave" class="save success">Your code is saved</p>
+    </div>
+</div>
+<div class="row editor-container">
+    <fieldset class="column left">
+        <div ui-ace="{theme: 'eclipse'}" mode='currentTab' on-load='aceLoaded' id="editor"></div>
+    </fieldset>
+    <!--            <div id="verticalResize"></div>-->
+    <fieldset class="column right">
+        <iframe id="previewWindow"></iframe>
+        <div id="previewBlackout" ng-hide="hidePlaceholder()">
+            <div id="previewPlaceholder">
+                <i class="fa fa-eye fa-lg"></i>Preview Area
+            </div>
+        </div>
+    </fieldset>
+</div>

@@ -120,5 +120,15 @@ a i {
     left: 0;
     right: 0;
     background-color: rgba(0,0,0,0.1);
-        
+}
+
+.save.error {
+    line-height: 40px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.save.success {
+    line-height: 40px;
+    color: #fff;
 }
