@@ -1,9 +1,13 @@
 angular.module('ccApp.controllers').
-  controller('EditorController', ['$scope', 'localStorageService', '$timeout', 'ApiFactory', '$routeParams', function($scope, localStorageService, $timeout, ApiFactory, $routeParams) {
+  controller('EditorController', ['$scope', 'localStorageService', '$timeout', 'ApiFactory', '$routeParams', '$rootScope', function($scope, localStorageService, $timeout, ApiFactory, $routeParams, $rootScope) {
     
-    $scope.files = {
-        html: '<h1>My First HTML Page</h1>',
-        css: 'h1 {\n color: blue; \n}'
+    $scope.project = {
+        files: {
+            html: '<h1>My First HTML Page</h1>',
+            css: 'h1 {\n color: blue; \n}'
+        },
+        name: '',
+        id: $routeParams.id
     };
     
     $scope.sessions = {};
@@ -13,21 +17,31 @@ angular.module('ccApp.controllers').
     $scope.failedSave = false;
     $scope.successfulSave = false;
     
+    $rootScope.$on('$locationChangeStart', function(event, next, current) {
+        if (/new/.test(next) === false) {
+            return true;
+        }
+        if (! confirm('Are you sure you want to leave this page?')) {
+            event.preventDefault();
+        }
+    });
+    
     $scope.publish = function() {
         $scope.save();
         
         var frame = angular.element(document.querySelector('#previewWindow'))[0];
         var doc = frame.contentDocument || frame.contentWindow.document;
-        angular.element(doc).find('body').html($scope.files.html);
+        angular.element(doc).find('style').remove();
+        
+        angular.element(doc).find('body').html($scope.project.files.html);
         
         var styles = angular.element('<style type="text/css"></style>')
-        styles.html($scope.files.css);
-        angular.element(doc).find('head style').remove();
+        styles.html($scope.project.files.css);
         angular.element(doc).find('head').append(styles);
     };
     
     $scope.changeTab = function(newTab) {
-        $scope.files[$scope.currentTab] = $scope.editor.getValue();
+        $scope.project.files[$scope.currentTab] = $scope.editor.getValue();
         $scope.currentTab = newTab;
         $scope.editor.setSession($scope.sessions[$scope.currentTab]);
     };
@@ -44,12 +58,12 @@ angular.module('ccApp.controllers').
     $scope.save = function() {
         $scope.failedSave = false;
         $scope.successfulSave = false;
-        $scope.files[$scope.currentTab] = $scope.editor.getValue();
+        $scope.project.files[$scope.currentTab] = $scope.editor.getValue();
         
         // make HTTP request
-        ApiFactory.update($routeParams.id, {
-            'files': $scope.files
-        }, function(data) {
+        ApiFactory.update($routeParams.id, 
+                          $scope.project,
+        function(data) {
             $scope.successfulSave = true;
         }, function(data) {
             $scope.failedSave = true;
@@ -59,17 +73,17 @@ angular.module('ccApp.controllers').
             $timeout.cancel($scope.localStoragePromise);
         }
         $scope.localStoragePromise = $timeout(function() {
-            localStorageService.add('data_cache',JSON.stringify($scope.files));
+            localStorageService.add($routeParams.id, JSON.stringify($scope.project));
         });
-    }
+    };
     
     $scope.aceLoaded = function(_editor){
         // Editor part
         $scope.editor = _editor;
         
         //Creating some sessions!
-        for (file in $scope.files) {
-            $scope.sessions[file] = ace.createEditSession($scope.files[file]);
+        for (file in $scope.project.files) {
+            $scope.sessions[file] = ace.createEditSession($scope.project.files[file]);
             $scope.sessions[file].setMode("ace/mode/" + file);
             $scope.sessions[file].setUndoManager(new ace.UndoManager()); 
         }
@@ -78,10 +92,37 @@ angular.module('ccApp.controllers').
     };
     
     init = function() {
-        var cache = localStorageService.get('data_cache');
+        var cache = localStorageService.get($routeParams.id);
         if (cache) {
-            $scope.files = JSON.parse(cache);
-        }  
+            var parsedCache = JSON.parse(cache);
+            if (parsedCache.files) {
+                $scope.project = parsedCache;
+            } else {
+                $scope.project.files = parsedCache;
+            }
+            if ($scope.project.id == undefined) {
+                $scope.project.id = $routeParams.id;
+            }
+        } else {
+            // load it from the server
+            ApiFactory.get($routeParams.id, function(data) {
+                if (data.files != undefined) {
+                    $scope.project.name = data.name;
+                    for (file in data.files) {
+                        $scope.project.files[data.files[file].type] = data.files[file].contents;
+                    }
+                    for (file in $scope.project.files) {
+            $scope.sessions[file] = ace.createEditSession($scope.project.files[file]);
+            $scope.sessions[file].setMode("ace/mode/" + file);
+            $scope.sessions[file].setUndoManager(new ace.UndoManager()); 
+        }
+        
+        $scope.editor.setSession($scope.sessions[$scope.currentTab]);
+                }
+            }, function(data) {
+                alert('Oh dear me.... something went wrong');
+            });
+        }
     };
     
     init();

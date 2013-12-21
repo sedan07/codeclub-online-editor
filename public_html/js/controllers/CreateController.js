@@ -4,7 +4,7 @@ angular.module('ccApp.controllers', ['LocalStorageModule', 'ccApp.factory']).
         ApiFactory.create(function(data) {
             $location.path('/' + data.id);
         }, function(data) {
-            alert('Error crsting new project');
+            alert('Error creating new project');
         });
    
         
