@@ -7,12 +7,13 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'public_html/js/lib/angular/angular.js', 
+      'public_html/js/lib/angular/angular.js',
+      'public_html/js/lib/angular/angular-route.js',
       'public_html/js/lib/ace/ace.js',
       'public_html/js/lib/localStorageModule.js',
       'public_html/js/lib/ui-ace.js',
       'public_html/js/app.js',
-      'public_html/js/controllers/*.js',
+      'public_html/js/**/*.js',
       // Unit test files
       'test/unit/angular-mocks.js',
       'test/unit/**/*.js'

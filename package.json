@@ -1,0 +1,11 @@
+{
+  "name": "codeclub-online-editor",
+  "description": "A really simple HTML/CSS editor for use at codeclub if the machines don't have anything good installed",
+  "repository": "https://github.com/seb-github/codeclub-online-editor",
+  "devDependencies": {
+    "phantomjs" : "~1.9",
+    "karma" : "~0.10",
+    "karma-junit-reporter" : "~0.1",
+    "karma-jasmine" : "~0.1"
+  }
+}
