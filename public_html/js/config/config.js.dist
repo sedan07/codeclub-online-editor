@@ -1,0 +1,3 @@
+// Set this to URL prefix for your REST API where data can be loaded from and
+// saved to 
+ccApp.constant('apiPrefix', 'http://localhost/project');

@@ -3,3 +3,4 @@ test-results.xml
 test/npm-debug.log
 
 /node_modules
+/public_html/js/config/config.js
