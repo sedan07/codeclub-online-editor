@@ -5,7 +5,7 @@
         </ul>
         <ul class="commands">
             <li><a ng-click="publish()" href=""><i class="fa fa-eye"></i>Preview</a></li>
-            <li><a href="/project/{{project.id}}/preview" target="_blank"><i class="fa fa-arrows-alt"></i>Full Screen</a></li>
+            <li><a href="{{apiPrefix}}/{{project.id}}/preview" target="_blank"><i class="fa fa-arrows-alt"></i>Full Screen</a></li>
         </ul>
         <p ng-show="failedSave" class="save error">Unable to save your code at the moment :-(</p>
         <p ng-show="successfulSave" class="save success">Your code is saved</p>

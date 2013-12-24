@@ -1,6 +1,7 @@
 angular.module('ccApp.controllers').
-  controller('EditorController', ['$scope', 'localStorageService', '$timeout', 'ApiFactory', '$routeParams', '$rootScope', function($scope, localStorageService, $timeout, ApiFactory, $routeParams, $rootScope) {
+  controller('EditorController', ['$scope', 'localStorageService', '$timeout', 'ApiFactory', '$routeParams', '$rootScope', 'apiPrefix', function($scope, localStorageService, $timeout, ApiFactory, $routeParams, $rootScope, apiPrefix) {
     
+    $scope.apiPrefix = apiPrefix;
     $scope.project = {
         files: {
             html: '<h1>My First HTML Page</h1>',

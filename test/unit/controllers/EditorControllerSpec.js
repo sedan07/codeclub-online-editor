@@ -28,6 +28,19 @@ describe('EditorController', function() {
       
       expect(localStorageService.get).toHaveBeenCalled();
    }); 
+   
+   xit('should setup the default editor sessions once the ACE editor has loaded', function() {
+      spyOn(localStorageService, 'get');
+      
+      ctrl("EditorController", {
+            $scope: scope,
+            localStorageService: localStorageService
+      });
+      
+      spyOn(scope, 'editor');
+      
+      expect(localStorageService.get).toHaveBeenCalled();
+   }); 
 });
 
 

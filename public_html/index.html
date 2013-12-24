@@ -12,7 +12,7 @@
     </head>
     <body>
         <div ng-view></div>
-
+        
         <script src="js/lib/ace/ace.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/lib/angular/angular.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/lib/angular/angular-route.js" type="text/javascript" charset="utf-8"></script>
@@ -22,6 +22,8 @@
         <script src="js/factory/ApiFactory.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/controllers/CreateController.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/controllers/EditorController.js" type="text/javascript" charset="utf-8"></script>
-        
+        <script type="text/javascript">
+            ccApp.constant('apiPrefix', 'http://cc-editor.localhost/project');
+        </script>
     </body>
 </html>
